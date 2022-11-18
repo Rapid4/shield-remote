@@ -86,86 +86,7 @@ class TVCardServices extends LitElement {
       <ha-card .header="${this._config.name}">
           <div class="row">
           </div>
-          ${
-            this._config.tv && this._config.power
-              ? html`
-                  <div class="row">
-                    <ha-icon-button
-                      .action="${"power"}"
-                      @click="${this.handleActionClick}"
-                      icon="mdi:power"
-                      .path=${mdiPower}
-                      title="Power"
-                    ></ha-icon-button>
-                  </div>
-                `
-              : ""
-          }
-          ${
-            this._config.tv && !(this._config.power) && (this._config.power_on || this._config.power_off)
-              ? html`
-                  <div class="row">
-                    <ha-icon-button
-                      .action="${"power_on"}"
-                      @click="${this.handleActionClick}"
-                      icon="mdi:power-on"
-                      .path=${mdiPowerOn}
-                      title="Power on"
-                    ></ha-icon-button>
-                    ${emptyButton}
-                    <ha-icon-button
-                      .action="${"power_off"}"
-                      @click="${this.handleActionClick}"
-                      icon="mdi:power-off"
-                      .path=${mdiPowerOff}
-                      title="Power off"
-                    ></ha-icon-button>
-                  </div>
-                `
-              : ""
-          }
-                 
-          ${
-            this._config.back || this._config.home || this._config.menu
-              ? html`
-                  <div class="row">
-                    ${this._config.back
-                      ? html`
-                          <ha-icon-button
-                            .action="${"back"}"
-                            @click="${this.handleActionClick}"
-                            icon="mdi:arrow-left"
-                            .path=${mdiArrowLeft}
-                            title="Back"
-                          ></ha-icon-button>
-                        `
-                      : emptyButton}
-                    ${this._config.home
-                      ? html`
-                          <ha-icon-button
-                            .action="${"home"}"
-                            @click="${this.handleActionClick}"
-                            icon="mdi:video-input-hdmi"
-                            .path=${mdiHome}
-                            title="Home"
-                          ></ha-icon-button>
-                        `
-                      : emptyButton}
-                    ${this._config.menu
-                      ? html`
-                          <ha-icon-button
-                            .action="${"menu"}"
-                            @click="${this.handleActionClick}"
-                            icon="mdi:menu"
-                            .path=${mdiMenu}
-                            title="Menu"
-                          ></ha-icon-button>
-                        `
-                      : emptyButton}
-                  </div>
-                `
-              : ""
-          }
+  
           <div class="row">
             <ha-icon-button
               .action="${"up"}"
@@ -198,27 +119,28 @@ class TVCardServices extends LitElement {
               title="Right"
             ></ha-icon-button>
           </div>
-           <div class="row">
-            <ha-icon-button
-              .action="${"down"}"
-              @click="${this.handleActionClick}"
-              icon="mdi:chevron-down"
-              .path=${mdiChevronDown}
-              title="Down"
-            ></ha-icon-button>
+            <div class="row">
+              <ha-icon-button
+                .action="${"down"}"
+                @click="${this.handleActionClick}"
+                icon="mdi:chevron-down"
+                .path=${mdiChevronDown}
+                title="Down"
+              ></ha-icon-button>
           </div>
+          
           ${
-            this._config.reverse || this._config.play || this._config.forward
+            this._config.back || this._config.play || this._config.home
               ? html`
                   <div class="row">
-                    ${this._config.reverse
+                    ${this._config.back
                       ? html`
                           <ha-icon-button
-                            .action="${"reverse"}"
+                            .action="${"back"}"
                             @click="${this.handleActionClick}"
-                            icon="mdi:rewind"
-                            .path=${mdiRewind}
-                            title="Rewind"
+                            icon="mdi:arrow-left"
+                            .path=${mdiArrowLeft}
+                            title="Back"
                           ></ha-icon-button>
                         `
                       : emptyButton}
@@ -233,101 +155,14 @@ class TVCardServices extends LitElement {
                           ></ha-icon-button>
                         `
                       : emptyButton}
-                    ${this._config.forward
+                    ${this._config.home
                       ? html`
                           <ha-icon-button
-                            .action="${"forward"}"
+                            .action="${"home"}"
                             @click="${this.handleActionClick}"
-                            icon="mdi:fast-forward"
-                            .path=${mdiFastForward}
-                            title="Fast-Forward"
-                          ></ha-icon-button>
-                        `
-                      : emptyButton}
-                  </div>
-                `
-              : ""
-          }
-          ${
-            this._config.youtube ||
-            this._config.hulu ||
-            this._config.prime_video
-              ? html`
-                  <div class="row">
-                    ${this._config.youtube ?
-                      html`
-                        <ha-icon-button
-                          .action="${"youtube"}"
-                          @click="${this.handleActionClick}"
-                          icon="mdi:youtube"
-                          .path=${mdiYoutube}
-                          title="YouTube"
-                        ></ha-icon-button>
-                      `
-                    : emptyButton}
-                    ${this._config.hulu ?
-                      html`
-                        <ha-icon-button
-                          .action="${"hulu"}"
-                          @click="${this.handleActionClick}"
-                          icon="mdi:hulu"
-                          .path=${mdiHulu}
-                          title="Hulu"
-                        ></ha-icon-button>
-                      `
-                    : emptyButton}
-                    ${this._config.prime_video ?
-                      html`
-                        <ha-icon-button
-                          .action="${"prime_video"}"
-                          @click="${this.handleActionClick}"
-                          icon="mdi:amazon"
-                          .path=${AMAZON_ICON_PATH}
-                          title="Prime Video"
-                        ></ha-icon-button>
-                      `
-                    : emptyButton}
-                  </div>
-                `
-              : ""
-          }
-          
-          ${
-            this._config.netflix ||
-            this._config.plex ||
-            this._config.finder
-              ? html`
-                  <div class="row">
-                    ${this._config.netflix
-                      ? html`
-                          <ha-icon-button
-                            .action="${"netflix"}"
-                            @click="${this.handleActionClick}"
-                            icon="mdi:netflix"
-                            .path=${mdiNetflix}
-                            title="Netflix"
-                          ></ha-icon-button>
-                        `
-                      : emptyButton}
-                    ${this._config.plex
-                      ? html`
-                          <ha-icon-button
-                            .action="${"plex"}"
-                            @click="${this.handleActionClick}"
-                            icon="mdi:plex"
-                            .path=${mdiPlex}
-                            title="Plex"
-                          ></ha-icon-button>
-                        `
-                      : emptyButton}
-                    ${this._config.finder
-                      ? html`
-                          <ha-icon-button
-                            .action="${"finder"}"
-                            @click="${this.handleActionClick}"
-                            icon="mdi:remote"
-                            .path=${mdiRemote}
-                            title="Remote Finder"
+                            icon="mdi:video-input-hdmi"
+                            .path=${mdiHome}
+                            title="Home"
                           ></ha-icon-button>
                         `
                       : emptyButton}
@@ -399,7 +234,7 @@ class TVCardServices extends LitElement {
         }
         .row {
           display: flex;
-          padding: 8px 16px 8px 16px;
+          padding: 8px 36px 8px 36px;
           justify-content: space-evenly;
         }
         .diagonal {
